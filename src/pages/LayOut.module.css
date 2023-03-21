@@ -1,0 +1,15 @@
+.wrapperOutlet {
+    width: 80%;
+    margin: 0 auto;
+    /*border-radius: 24px 24px 0 0;*/
+}
+.wrapper{
+    height: 20px;
+    border-radius: 24px 24px 0 0;
+    position: relative;
+    width: 100%;
+    background-color: #cccbc8;
+    top: -20px
+}
+
+

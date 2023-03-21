@@ -1,0 +1,71 @@
+.styleInput{
+    width: 17em;
+    border-bottom-width: 2px;
+    font-weight: bold;
+    margin: 0 auto;
+    display: block;
+    background: 0;
+    border: 0;
+    border-bottom: 3px solid #fff;
+    color: #fff;
+    outline: none;
+    text-align: center;
+    height:130px;
+    font-size:40px;
+    border-color: white;
+}
+
+.text{
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size:40px;
+}
+
+.userBox {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 684px;
+    height: 82vh;
+    margin: auto;
+}
+a {
+    text-decoration: none;
+}
+
+.button {
+    text-align: center;
+    background: #481173;
+    color: #fff;
+    width: 100%;
+    font-size:30px;
+    font-weight: 400;
+    margin-top: 40px;
+    padding: 20px 0;
+    display: block;
+    border-radius: 0.5em;
+    box-shadow:
+            0px 1.7px 2.2px rgba(0, 0, 0, 0.02),
+            0px 4px 5.3px rgba(0, 0, 0, 0.028),
+            0px 7.5px 10px rgba(0, 0, 0, 0.035),
+            0px 13.4px 17.9px rgba(0, 0, 0, 0.042),
+            0px 25.1px 33.4px rgba(0, 0, 0, 0.05),
+            0px 60px 80px rgba(0, 0, 0, 0.07);
+}
+
+.err {
+    composes: styleInput;
+    border-color: red;
+
+
+}
+
+
+.button:active {
+    transform: scale(1.01);
+}

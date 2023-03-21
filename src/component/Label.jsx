@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import OutputLabel from "./OutputLabel";
+
 import classes from "./Label.module.css";
 
 const Label = (props) => {
@@ -80,10 +80,11 @@ console.log(props.data)
         <div className={classes.top}>
             {data
                 ?   <div className={classes.container}>
-                    <p className={classes.text}><span>{props.data.article} - {nameFind} - {data[0].partB}</span></p>
-                        <img src={`data:image/jpeg;base64,${data[0].file}`} />
+                    <p className={classes.text}><span className={classes.textSpanSuper}>{props.data.article} - </span><span className={classes.textSpan}>{nameFind} - </span><span className={classes.textSpanSuper}>{data[0].partB}</span></p>
+                        <img className={classes.img} src={`data:image/jpeg;base64,${data[0].file}`} />
                     </div>
-                : <span>Загружаем стикер</span>
+                : <div className={classes.container}><span className={classes.loader}></span> <div className={classes.textLoader}>Загружаем этикетки</div>
+                </div>
 
             }
         </div>
