@@ -1,0 +1,29 @@
+.text {
+    font-size: 20px;
+    /*margin: 0 auto;*/
+    width: 580px;
+    height: 400px;
+    /*text-align: center*/
+    display: flex;
+    align-items: center;
+}
+
+span {
+
+}
+
+
+.container {
+
+   /* flex-direction: column;*/
+   /* justify-content: center;*/
+   /* align-items: center;*/
+   /* padding-top: 5px;*/
+   /* padding-left: 5px;*/
+   /* text-align: center;*/
+
+}
+
+.top {
+
+}
