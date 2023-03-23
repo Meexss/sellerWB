@@ -80,7 +80,10 @@ console.log(props.data)
         <div className={classes.top}>
             {data
                 ?   <div className={classes.container}>
-                    <p className={classes.text}><span className={classes.textSpanSuper}>{props.data.article} - </span><span className={classes.textSpan}>{nameFind} - </span><span className={classes.textSpanSuper}>{data[0].partB}</span></p>
+                    <p className={classes.text}><p className={classes.wrapper}><span className={classes.textSpanSuper}>{props.data.article} - </span>
+                    <span className={classes.textSpan}>{nameFind} - </span><span className={classes.textSpanSuper}>{data[0].partB}</span>
+                    </p>
+                    </p>
                         <img className={classes.img} src={`data:image/jpeg;base64,${data[0].file}`} />
                     </div>
                 : <div className={classes.container}><span className={classes.loader}></span> <div className={classes.textLoader}>Загружаем этикетки</div>
