@@ -10,7 +10,7 @@ const App = () => {
             <Routes>
                 <Route path='/' element={<LayOut/>}>
                     <Route index element={<FirstPage/>}/>
-                    <Route path='data/:WB' element={<StartPage/>}/>
+                    <Route path='data/:WB/:token' element={<StartPage/>}/>
                 </Route>
             </Routes>
         </div>
