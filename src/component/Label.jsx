@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import classes from "./Label.module.css";
 
+
 const Label = (props) => {
   const [data, setData] = useState(); //данные по стикерам
   const [name, setName] = useState([]); //данные по названию
   const [nameFind, setNameFind] = useState(); //данные по названию
+
 
   const initData = async () => {
     const response = await fetch(
@@ -33,7 +35,7 @@ const Label = (props) => {
         method: "POST",
         headers: {
           accept: "application/json",
-          Authorization: props.token,
+          Authorization: "eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxODM5MDk5MywiaWQiOiJjNjNlNWE1OS1lYWQ4LTQwMTYtOTY5Yi03OGJiM2JiNmZlZDUiLCJpaWQiOjg4ODM1NjQ2LCJvaWQiOjk0MzY1NSwicyI6MTAsInNhbmRib3giOmZhbHNlLCJzaWQiOiIwYjBkYjQzOS05ZDc4LTQ1MTAtOGU0MS0wNDM1NzljODgxM2EiLCJ1aWQiOjg4ODM1NjQ2fQ.TQgkwnsy6aWv_6Mei9MUl94ZC7HLn7JWVGo-o8W8STIXWgNQUi_B5JHkkZbcPLM2mwu1zq23scqDLoAztYUMwA",
           "Content-Type": "application/json",
         },
         // body: '{\n  "orders": [\n    5346346\n  ]\n}',
@@ -68,10 +70,7 @@ const Label = (props) => {
     startname();
   }, [name]);
 
-  console.log(props.data);
-  console.log(data);
-  console.log(name);
-  console.log(nameFind);
+
   return (
     <div className={classes.top}>
       {data ? (

@@ -6,30 +6,13 @@ import Label from "../component/Label";
 const FirstPage = () => {
   const [text, setText] = useState("");
   const [error, setError] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
 
-  const dataSelect = (event) => {
-    setSelectedOption(event.target.value);
-  };
 
   const tokenOne =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJRCI6IjY0MDU3NzQwLThkMzYtNGI0YS1iZjZhLTlkMmEzMDljM2Q4NyJ9.OMO-inzyzCUil3VcsP2SjrsiiaQSOjCR1ezgPgsB8vw";
-  const tokenTwo =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NJRCI6IjdmMTNhMjRhLWViODEtNDlkZi1hYjA0LWE1OTg5ZGEzMjIwMiJ9.ERYzAZJjgfPJ2_G5NshTUpTezS0c3bC3XZQ0idQUdTw";
-
-  console.log(selectedOption);
+    "eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxODM5MDkzNiwiaWQiOiI1ZTU4MjI1MC1hYzczLTRmNTMtOTc1ZS1jNjU4NjU1ZGQ3YWEiLCJpaWQiOjg4ODM1NjQ2LCJvaWQiOjk0MzY1NSwicyI6NDgsInNhbmRib3giOmZhbHNlLCJzaWQiOiIwYjBkYjQzOS05ZDc4LTQ1MTAtOGU0MS0wNDM1NzljODgxM2EiLCJ1aWQiOjg4ODM1NjQ2fQ.0QQG1Iiqwr3uTsdgkMz7UYdl_OTEc3A9tQJAJ634suzHf6Go6HMJdnWk2iL09r3U_54rAeXQdDoc-FmDzjo6AA";
+  
   return (
     <div className={classes.userBox}>
-      <div className={classes.dropdown}>
-        <span className={classes.text}>Выберите токен доступа</span>
-        <select className={classes.option}  name="color" value={selectedOption} onChange={dataSelect}>
-          <option value="" hidden disabled selected>
-            Выбрать
-          </option>
-          <option value={tokenOne}>TokenOne</option>
-          <option value={tokenTwo}>TokenTwo</option>
-        </select>
-      </div>
       <span className={classes.text}>Вставьте номер поставки</span>
       <input
         type="text"
@@ -46,7 +29,7 @@ const FirstPage = () => {
           <Link
             className={classes.button}
             // className={classes.linkSee}
-            to={`/data/${text}/${selectedOption}`}
+            to={`/data/${text}/${tokenOne}`}
           >
             Получить стикеры
           </Link>
