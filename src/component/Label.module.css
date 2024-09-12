@@ -22,7 +22,11 @@
   transform: translate(-50%, -50%);
   animation: scaleUp 1s linear infinite;
 }
-
+.textLoader {
+  margin-top: 20px;
+  color: black;
+  font-size: 20px;
+}
 @keyframes scaleUp {
   0% {
     transform: translate(-50%, -50%) scale(0);
@@ -50,34 +54,29 @@
   margin-left: 0;
 }
 
-.textLoader {
-  margin-top: 20px;
-  color: black;
-  font-size: 20px;
-}
-
 .text {
   background-color: #ffffff;
   width: 580px;
-  height: 230px;
+  height: 400px;
   text-align: center;
   align-items: center;
   margin: 0 auto;
   border-radius: 20px;
-  /*line-height: 400px;*/
-  padding-top: 100px;
   display: block;
 }
 
 .wrapper {
+  padding-top: 50px;
   width: 500px;
   display: block;
   margin-left: 40px;
 }
 
 .img {
-  margin-left: 2px;
-  margin-top: -5px;
+  width: 580px;
+  height: 400px;
+  /* margin-left: 2px;
+  margin-top: -5px; */
   border-radius: 20px;
 }
 .textSpan {

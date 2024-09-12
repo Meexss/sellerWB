@@ -5,12 +5,13 @@ import classes from "./LayOut.module.css";
 import Footer from "../component/Footer/Footer";
 
 const LayOut = () => {
-  const ref = useRef();
+  // const ref = useRef();
 
   return (
     <div>
       <Header />
-      <div ref={ref} className={classes.wrapperOutlet}>
+      <div className={classes.wrapperOutlet}>
+        {/* <div ref={ref} className={classes.wrapperOutlet}> */}
         <Outlet />
       </div>
       <Footer />
