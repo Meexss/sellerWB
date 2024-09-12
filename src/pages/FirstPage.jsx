@@ -1,43 +1,139 @@
-import React, { useState } from "react";
+// FirstPage.js
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import classes from "./FirstPage.module.css";
-import Label from "../component/Label";
+import { setTableData } from "./actions";
 
 const FirstPage = () => {
-  const [text, setText] = useState("");
-  const [error, setError] = useState(false);
+  const dispatch = useDispatch();
+  const tableData = useSelector((state) => state.tableData);
 
+  const addRow = () => {
+    dispatch(
+      setTableData([
+        ...tableData,
+        { col: tableData.length + 1, article: "", id: "", name: "" },
+      ]),
+    );
+  };
 
-  const tokenOne =
-    "eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMDI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcxODM5MDkzNiwiaWQiOiI1ZTU4MjI1MC1hYzczLTRmNTMtOTc1ZS1jNjU4NjU1ZGQ3YWEiLCJpaWQiOjg4ODM1NjQ2LCJvaWQiOjk0MzY1NSwicyI6NDgsInNhbmRib3giOmZhbHNlLCJzaWQiOiIwYjBkYjQzOS05ZDc4LTQ1MTAtOGU0MS0wNDM1NzljODgxM2EiLCJ1aWQiOjg4ODM1NjQ2fQ.0QQG1Iiqwr3uTsdgkMz7UYdl_OTEc3A9tQJAJ634suzHf6Go6HMJdnWk2iL09r3U_54rAeXQdDoc-FmDzjo6AA";
-  
+  const handleInputChange = (col, column, value) => {
+    const updatedData = tableData.map((row) =>
+      row.col === col ? { ...row, [column]: value } : row,
+    );
+
+    if (col === tableData.length && value.trim() !== "") {
+      dispatch(
+        setTableData([
+          ...updatedData,
+          { col: tableData.length + 1, article: "", id: "", name: "" },
+        ]),
+      );
+    } else {
+      dispatch(setTableData(updatedData));
+    }
+  };
+
+  const handleDataPaste = (e) => {
+    e.preventDefault();
+    const clipboardData = e.clipboardData.getData("Text");
+    const rows = clipboardData.split("\n");
+
+    dispatch(
+      setTableData(
+        rows.reduce((acc, row, index) => {
+          const cells = row.split("\t");
+          if (cells.length >= 3) {
+            if (index < tableData.length) {
+              acc.push({
+                ...tableData[index],
+                article: tableData[index].article || cells[0] || "",
+                id: tableData[index].id || cells[1] || "",
+                name: tableData[index].name || cells[2] || "",
+              });
+            } else {
+              acc.push({
+                col: tableData.length + index + 1,
+                article: cells[0] || "",
+                id: cells[1] || "",
+                name: cells[2] || "",
+              });
+            }
+          }
+          return acc;
+        }, []),
+      ),
+    );
+  };
+
+  const clearTable = () => {
+    dispatch(setTableData([{ col: 1, article: "", id: "", name: "" }]));
+  };
+
   return (
-    <div className={classes.userBox}>
-      <span className={classes.text}>Вставьте номер поставки</span>
-      <input
-        type="text"
-        placeholder="WB-GI-.."
-        className={error ? classes.err : classes.styleInput}
-        value={text}
-        onChange={(e) => {
-          setError(false);
-          setText(e.target.value);
-        }}
-      />
+    <div classname={classes.main}>
       <div>
-        {text.length > 13 ? (
-          <Link
-            className={classes.button}
-            // className={classes.linkSee}
-            to={`/data/${text}/${tokenOne}`}
-          >
-            Получить стикеры
-          </Link>
-        ) : (
-          <span onClick={(e) => setError(true)} className={classes.button}>
-            Получить стикеры
-          </span>
-        )}
+        <Link
+          className={classes.button}
+          to={{
+            pathname: "/data",
+          }}
+        >
+          Получить стикеры
+        </Link>
+      </div>
+      <div clasename={classes.table}>
+        <button type="button" onClick={addRow}>
+          Добавить строку
+        </button>
+        <button type="button" onClick={clearTable}>
+          Очистить таблицу
+        </button>
+        <table onPaste={handleDataPaste}>
+          <thead>
+            <tr>
+              <th>ID (col)</th>
+              <th>Колонка 1 (article)</th>
+              <th>Колонка 2 (id)</th>
+              <th>Колонка 3 (name)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.map((row) => (
+              <tr key={row.col}>
+                <td>{row.col}</td>
+                <td>
+                  <input
+                    type="text"
+                    value={row.article}
+                    onChange={(e) =>
+                      handleInputChange(row.col, "article", e.target.value)
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={row.id}
+                    onChange={(e) =>
+                      handleInputChange(row.col, "id", e.target.value)
+                    }
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={row.name}
+                    onChange={(e) =>
+                      handleInputChange(row.col, "name", e.target.value)
+                    }
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
