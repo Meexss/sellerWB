@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import html2pdf from "html2pdf.js"; // Импортируем библиотеку html2pdf
+import { useReactToPrint } from "react-to-print";
 import classes from "./StartPage.module.css";
 import Label from "../component/Label";
 
@@ -9,28 +9,14 @@ const StartPage = () => {
     "eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjQwNTA2djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTczMjU3Mjc3MywiaWQiOiI1YWNmMTVmNC0zMGYzLTQ0NDEtYjAzOC04OTZlZWYxMjU2ZWYiLCJpaWQiOjg4ODM1NjQ2LCJvaWQiOjk0MzY1NSwicyI6NDgsInNpZCI6IjBiMGRiNDM5LTlkNzgtNDUxMC04ZTQxLTA0MzU3OWM4ODEzYSIsInQiOmZhbHNlLCJ1aWQiOjg4ODM1NjQ2fQ.EoAuYYSmbo6Hx44JJDN98hY97uGBzUEPtH75cZn_8C-liFF5J65YwPtYXWTRG_60_lMXtb4xR7Z0lNfIHs6wOg"; // Замените на ваш токен
 
   const tableData = useSelector((state) => state.tableData);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 90;
   const [sortData, setSortData] = useState([]);
-  const labelsContainerRef = useRef(); // Реф для контейнера с компонентами Label
-
-  // Функция для сохранения в PDF всех Label на текущей странице
-  const handleSaveAsPDF = () => {
-    const opt = {
-      filename: `labels-page-${currentPage}.pdf`,
-      image: { type: "jpeg", quality: 0.9 },
-      html2canvas: { scale: 1 },
-      jsPDF: {
-        unit: "px",
-        format: [580, 400],
-        orientation: "landscape",
-        compress: true,
-      }, // Устанавливаем нужные размеры
-    };
-
-    const element = labelsContainerRef.current; // Получаем реф на контейнер с Label
-    html2pdf().from(element).set(opt).save(); // Генерация PDF
-  };
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   useEffect(() => {
     // Группируем данные по артикулу
@@ -91,8 +77,7 @@ const StartPage = () => {
         </button>
       </div>
 
-      {/* Контейнер для всех Label на текущей странице */}
-      <div ref={labelsContainerRef}>
+      <div ref={componentRef}>
         {sortData.length > 0 ? (
           getPageItems().map((item, index) => (
             <Label
@@ -110,10 +95,8 @@ const StartPage = () => {
           </div>
         )}
       </div>
-
-      {/* Кнопка для сохранения всех Label на текущей странице в один PDF */}
-      <button className={classes.pdf} onClick={handleSaveAsPDF}>
-        Save all labels on this page as PDF
+      <button className={classes.print} onClick={handlePrint}>
+        Print this page!
       </button>
     </div>
   );
