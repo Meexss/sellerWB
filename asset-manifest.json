@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sellerWB/static/css/main.f6a919bf.css",
+    "main.js": "/sellerWB/static/js/main.e306a95f.js",
+    "index.html": "/sellerWB/index.html",
+    "main.f6a919bf.css.map": "/sellerWB/static/css/main.f6a919bf.css.map",
+    "main.e306a95f.js.map": "/sellerWB/static/js/main.e306a95f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f6a919bf.css",
+    "static/js/main.e306a95f.js"
+  ]
+}
