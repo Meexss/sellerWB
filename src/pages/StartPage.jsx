@@ -55,6 +55,7 @@ const StartPage = () => {
 
   const totalPages = Math.ceil(sortData.length / itemsPerPage);
 
+  console.log("фильтрованный массив", getPageItems())
   return (
     <div>
       <div className={classes.pagin}>
